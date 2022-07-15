@@ -1,0 +1,43 @@
+//Libraries
+#include <Wire.h> 
+#include <LiquidCrystal_I2C.h>
+#include <DHT.h>
+
+//Constants
+#define DHTPIN 2     // what pin we're connected to
+#define DHTTYPE DHT22   // DHT 22  (AM2302)
+DHT dht(DHTPIN, DHTTYPE); // Initialize DHT sensor for normal 16mhz Arduino
+
+//Variables
+LiquidCrystal_I2C lcd = LiquidCrystal_I2C(0x27, 16, 2); // lcd screen
+float hum;  //Stores humidity value
+float temp; //Stores temperature value
+float soil_hum;
+
+void setup() {
+  lcd.init(); // initialise the LCD screen
+  lcd.backlight();
+  dht.begin();
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+    hum = dht.readHumidity();
+    temp= dht.readTemperature();
+    soil_hum = analogRead(0);
+    lcd.clear();
+    lcd.setCursor(0,0);
+    lcd.print("");
+    lcd.print(temp);
+    lcd.print("C  ");
+    lcd.print(hum);
+    lcd.print("%");
+    lcd.setCursor(0,1);
+    lcd.print("");
+    lcd.print(soil_hum);
+    if (soil_hum < 300 ){lcd.print(" DRY");}
+    else if (soil_hum > 299 && soil_hum < 700 ){lcd.print(" HUMID");}
+    else if (soil_hum > 699 ){lcd.print(" WET");}
+    else {lcd.print(" ERROR");}
+    delay(2000); //Delay 2 sec.
+}

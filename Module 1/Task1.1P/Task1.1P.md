@@ -26,3 +26,7 @@ Connect the wires according to the diagram below.
 
 <img src="SoilSensor.png" width="600">
 [Schematic Diagram]
+
+
+## Example of system in use
+<img src="SensorOutput.png" width = "600">

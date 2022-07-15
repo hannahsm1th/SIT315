@@ -1,25 +1,33 @@
 //Libraries
-#include <Wire.h> 
+
 #include <LiquidCrystal_I2C.h>
 #include <DHT.h>
 
+
 //Constants
+
 #define DHTPIN 2
 #define DHTTYPE DHT22
 DHT dht(DHTPIN, DHTTYPE);
 
+
 //Variables
+
 LiquidCrystal_I2C lcd = LiquidCrystal_I2C(0x27, 16, 2); // LCD screen address
 float hum;  // Stores humidity value
 float temp; // Stores temperature value
 float soil_hum; // Stores soil humidity value
 
+
 void setup() {
+  
   // Initialising peripherals
   lcd.init();
   lcd.backlight();
   dht.begin();
+  
 }
+
 
 void loop() {
 
@@ -46,4 +54,5 @@ void loop() {
     
     //Delay 2 sec
     delay(2000); 
+  
 }

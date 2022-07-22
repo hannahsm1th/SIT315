@@ -20,7 +20,7 @@ void setup()
   // begin the serial monitor
   Serial.begin(9600);
   // attach interrupts
-  attachInterrupt(0, btn_ISR, RISING);
+  attachInterrupt(0, btn_ISR, CHANGE);
   attachInterrupt(1, pir_ISR, CHANGE);
 }
 
